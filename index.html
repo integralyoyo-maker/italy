@@ -45,10 +45,11 @@
         .section-title { font-size: 17px; font-weight: bold; color: var(--italy-green); margin-bottom: 12px; border-left: 4px solid var(--italy-green); padding-left: 10px; }
         
         /* 時間顯示卡片 */
-        .time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .time-card { background: #2d3436; color: #fff; padding: 12px; border-radius: 12px; text-align: center; }
-        .time-card .label { font-size: 12px; opacity: 0.8; margin-bottom: 4px; display: block; }
-        .time-card .time { font-family: monospace; font-size: 18px; font-weight: bold; color: #fab1a0; }
+        .time-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; }
+        .time-card { background: #2d3436; color: #fff; padding: 15px; border-radius: 12px; text-align: left; position: relative; }
+        .time-card .label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; display: block; color: #55efc4; }
+        .time-card .time { font-family: 'Courier New', monospace; font-size: 24px; font-weight: bold; color: #fab1a0; display: block; }
+        .time-card .date { font-size: 13px; opacity: 0.9; margin-top: 4px; display: block; }
 
         .info-card { background: #f8f9fa; padding: 12px; border-radius: 10px; margin-bottom: 10px; font-size: 14px; line-height: 1.6; border: 1px solid #edf2f7; }
         .flight-badge { background: #e17055; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 5px; display: inline-block; }
@@ -64,6 +65,11 @@
         .check-item { display: flex; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
         .check-item input { margin-top: 3px; margin-right: 10px; width: 16px; height: 16px; }
         .self-pay { color: white; background: var(--italy-red); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        
+        /* 氣溫表格 */
+        .weather-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 5px; }
+        .weather-table td, .weather-table th { border: 1px solid #eee; padding: 8px; text-align: center; }
+        .weather-table th { background: #f8f9fa; }
     </style>
 </head>
 <body>
@@ -90,12 +96,14 @@
             <div class="section-title">🕒 即時時差對照</div>
             <div class="time-grid">
                 <div class="time-card">
-                    <span class="label">🇹🇼 臺灣時間</span>
-                    <span id="tw-time" class="time">--:--:--</span>
+                    <span class="label">🇹🇼 臺灣時間 (CST +8:00)</span>
+                    <span id="tw-time" class="time">03:00:00</span>
+                    <span id="tw-date" class="date">2026年03月28日 星期六</span>
                 </div>
-                <div class="time-card">
-                    <span class="label">🇮🇹 義大利時間 (慢7時)</span>
-                    <span id="it-time" class="time">--:--:--</span>
+                <div class="time-card" style="background: #1e272e;">
+                    <span class="label">🇮🇹 義大利時間 (CET +1:00)</span>
+                    <span id="it-time" class="time">20:00:00</span>
+                    <span id="it-date" class="date">2026年03月27日 星期五</span>
                 </div>
             </div>
         </div>
@@ -119,46 +127,216 @@
         <div class="section">
             <div class="section-title">🌡️ 每日氣溫 (查詢日 3/27)</div>
             <p style="font-size: 13px; margin-bottom: 10px;">白天高溫 20°/12°，溫差大；高山上 2°/-8°。</p>
-            <table style="width:100%; border-collapse: collapse; font-size:13px; text-align:center;">
-                <tr style="background:#f8f9fa;"><td>3/30 (D2)</td><td>羅馬</td><td>18°/8°</td><td>☀️</td></tr>
-                <tr><td>3/31 (D3)</td><td>蘇蓮多</td><td>14°/10°</td><td>🌦️</td></tr>
-                <tr style="background:#f8f9fa;"><td>4/01 (D4)</td><td>佛羅倫斯</td><td>18°/8°</td><td>☀️</td></tr>
-                <tr><td>4/02 (D5)</td><td>威尼斯</td><td>17°/8°</td><td>☀️</td></tr>
+            <table class="weather-table">
+                <thead><tr><th>日期</th><th>城市</th><th>氣溫</th><th>天氣</th></tr></thead>
+                <tbody>
+                    <tr><td>3/30 (D2)</td><td>羅馬/拿波里</td><td>18°/8°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>3/31 (D3)</td><td>蘇蓮多/拿波里</td><td>14°/10°</td><td>🌦️ 晴時多雲偶雨</td></tr>
+                    <tr><td>4/01 (D4)</td><td>佛羅倫斯</td><td>18°/8°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>4/02 (D5)</td><td>威尼斯</td><td>17°/8°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>4/03 (D6)</td><td>米蘭</td><td>19°/7°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>4/04 (D7)</td><td>比薩</td><td>18°/8°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>4/05 (D8)</td><td>天空之城</td><td>17°/6°</td><td>☀️ 晴時多雲</td></tr>
+                    <tr><td>4/06 (D9)</td><td>羅馬</td><td>20°/9°</td><td>☀️ 晴時多雲</td></tr>
+                </tbody>
             </table>
         </div>
 
         <div class="section">
-            <div class="section-title">🎒 領隊保命叮嚀</div>
-            <div class="check-item"><input type="checkbox"> <span><b>防扒：</b>背包前背，歐洲扒手多。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>D4 過夜包：</b>老城區住宿，大行李放車上。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>行李重量：</b>託運23kg×2；隨身7kg(鋰電池必隨身)。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>自帶護照：</b>若自帶者請務必記得帶到機場！</span></div>
+            <div class="section-title">🎒 領隊簡訊重點</div>
+            <div class="check-item"><input type="checkbox"> <span><b>機場領取：</b>耳機、行李帶、轉接頭、網卡。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>防扒：</b>背包前背，準備信用卡號/止付電話紀錄。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>D4 過夜包：</b>4/1住老城區，請備小包裝換洗衣物。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>行李重量：</b>託運23kg×2；隨身7kg(鋰電池禁託運)。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>飲水習慣：</b>自備保溫瓶，旅館酒吧可索取熱開水。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>衣物準備：</b>洋蔥式穿法，備舒適防滑防潑水休閒鞋。</span></div>
         </div>
     </div>
 
-    <div id="d1" class="day-box"><div class="section"><h1>D1 台北 ✈ 羅馬</h1><p>3/29 出發</p></div></div>
-    <div id="d2" class="day-box"><div class="section"><h1>D2 羅馬－拿波里</h1><div class="hotel-tag"><span class="hotel-ch">拿坡里假日酒店</span><span class="hotel-en">HOLIDAY INN NAPLES</span></div></div></div>
-    <div id="d12" class="day-box"><div class="section"><h1>D12 抵達台北</h1><p>4/09 05:40</p></div></div>
+    <div id="d1" class="day-box">
+        <div class="section">
+            <h1>Day 1 台北 ✈ 羅馬</h1>
+            <p>3/29 (日)</p>
+            <div class="info-card">晚餐：機上套餐</div>
+        </div>
+    </div>
+
+    <div id="d2" class="day-box">
+        <div class="section">
+            <h1>Day 2 羅馬－龐貝－拿波里</h1>
+            <p>3/30 (一)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/HOLIDAY+INN+NAPLES" target="_blank">
+                    <span class="hotel-ch">拿坡里假日酒店 (4星級)</span>
+                    <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：機上輕食<br>午餐：道地南義Pizza風味<br>晚餐：南義傳統料理</div>
+        </div>
+    </div>
+
+    <div id="d3" class="day-box">
+        <div class="section">
+            <h1>Day 3 卡布里島 ➔ 蘇蓮多 ➔ 拿波里</h1>
+            <p>3/31 (二)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/HOLIDAY+INN+NAPLES" target="_blank">
+                    <span class="hotel-ch">拿坡里假日酒店 (4星級)</span>
+                    <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：海鮮燉飯料理<br>晚餐：中式料理七菜一湯</div>
+        </div>
+    </div>
+
+    <div id="d4" class="day-box">
+        <div class="section">
+            <h1>Day 4 拿波里 +++ 佛羅倫斯</h1>
+            <p>4/01 (三)</p>
+            <div class="alert-box">👜 <b>今日進老城區：</b>請準備過夜小包。</div>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/Hotel+Albani+Firenze" target="_blank">
+                    <span class="hotel-ch">阿爾巴佛羅倫斯飯店 (4星級)</span>
+                    <span class="hotel-en">Hotel Albani Firenze</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：<span class="self-pay">配合火車敬請自理</span><br>晚餐：佛羅倫斯丁骨牛排</div>
+        </div>
+    </div>
+
+    <div id="d5" class="day-box">
+        <div class="section">
+            <h1>Day 5 佛羅倫斯 － 威尼斯</h1>
+            <p>4/02 (四)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/LEONARDO+ROYAL+HOTEL+VENICE+MESTRE" target="_blank">
+                    <span class="hotel-ch">威尼斯梅斯特雷萊昂納多皇家飯店</span>
+                    <span class="hotel-en">LEONARDO ROYAL HOTEL VENICE MESTRE</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：中式料理<br>晚餐：威尼斯墨魚麵+炸海鮮</div>
+        </div>
+    </div>
+
+    <div id="d6" class="day-box">
+        <div class="section">
+            <h1>Day 6 威尼斯 － 加達湖 － 米蘭</h1>
+            <p>4/03 (五)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/BEST+WESTERN+PLUS+HOTEL+LE+FAVAGLIE" target="_blank">
+                    <span class="hotel-ch">貝斯特韋斯特樂佛瓦雷普露斯酒店</span>
+                    <span class="hotel-en">BEST WESTERN PLUS HOTEL LE FAVAGLIE</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：義式三道式<br>晚餐：<span class="self-pay">米蘭市區敬請自理</span></div>
+        </div>
+    </div>
+
+    <div id="d7" class="day-box">
+        <div class="section">
+            <h1>Day 7 米蘭 － 比薩 － 托斯卡尼</h1>
+            <p>4/04 (六)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/BEST+WESTERN+GRAND+HTL+GUINIGI" target="_blank">
+                    <span class="hotel-ch">比薩地區飯店 (4星級)</span>
+                    <span class="hotel-en">BEST WESTERN GRAND HTL GUINIGI</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：中式料理<br>晚餐：托斯卡尼風味料理</div>
+        </div>
+    </div>
+
+    <div id="d8" class="day-box">
+        <div class="section">
+            <h1>Day 8 天空之城 － 羅馬</h1>
+            <p>4/05 (日)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/H10+ROMA+CITTA" target="_blank">
+                    <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                    <span class="hotel-en">H10 ROMA CITTA</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：天空之城精緻料理<br>晚餐：中式料理</div>
+        </div>
+    </div>
+
+    <div id="d9" class="day-box">
+        <div class="section">
+            <h1>Day 9 羅馬市區巡禮</h1>
+            <p>4/06 (一)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/H10+ROMA+CITTA" target="_blank">
+                    <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                    <span class="hotel-en">H10 ROMA CITTA</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：義式米其林推薦<br>晚餐：<span class="self-pay">敬請自理</span></div>
+        </div>
+    </div>
+
+    <div id="d10" class="day-box">
+        <div class="section">
+            <h1>Day 10 梵諦岡 － 羅馬自由行</h1>
+            <p>4/07 (二)</p>
+            <div class="hotel-tag">
+                <a class="hotel-link" href="https://www.google.com/maps/search/H10+ROMA+CITTA" target="_blank">
+                    <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                    <span class="hotel-en">H10 ROMA CITTA</span>
+                </a>
+            </div>
+            <div class="info-card">早餐：飯店內<br>午餐：<span class="self-pay">配合自由活動敬請自理</span><br>晚餐：羅馬音樂餐廳風味餐</div>
+        </div>
+    </div>
+
+    <div id="d11" class="day-box">
+        <div class="section">
+            <h1>Day 11 羅馬 ✈ 台北</h1>
+            <p>4/08 (三)</p>
+            <div class="info-card">早餐：飯店內<br>午餐：機上套餐<br>晚餐：機上套餐</div>
+        </div>
+    </div>
+
+    <div id="d12" class="day-box">
+        <div class="section">
+            <h1>Day 12 抵達台北</h1>
+            <p>4/09 (四)</p>
+            <div class="info-card">抵達桃園機場，結束難忘的義大利之旅。</div>
+        </div>
+    </div>
 
 </div>
 
 <script>
-    // 時間跳動功能
-    function updateTime() {
-        const now = new Date();
-        // 臺灣時間格式化
-        const twString = now.toLocaleTimeString('zh-TW', { hour12: false });
-        
-        // 義大利時間 (臺灣時間減 7 小時)
-        const itDate = new Date(now.getTime() - (7 * 60 * 60 * 1000));
-        const itString = itDate.toLocaleTimeString('zh-TW', { hour12: false });
+    // 時間初始化 (根據您要求從 03:00:00 開始)
+    let baseTime = new Date("2026/03/28 03:00:00");
+    const startTime = new Date();
 
-        document.getElementById('tw-time').innerText = twString;
-        document.getElementById('it-time').innerText = itString;
+    function updateClock() {
+        const now = new Date();
+        const diff = now.getTime() - startTime.getTime();
+        const currentTime = new Date(baseTime.getTime() + diff);
+        
+        // 臺灣時間格式
+        const twTimeStr = currentTime.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const twDateStr = currentTime.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) + " 星期六";
+        
+        document.getElementById('tw-time').innerText = twTimeStr;
+        document.getElementById('tw-date').innerText = twDateStr + " CST +8:00";
+
+        // 義大利時間 (慢 7 小時)
+        const itTimeDate = new Date(currentTime.getTime() - (7 * 60 * 60 * 1000));
+        const itTimeStr = itTimeDate.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        
+        // 計算義大利日期與星期
+        const dayMap = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        const itDateStr = itTimeDate.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) + " " + dayMap[itTimeDate.getDay()];
+        
+        document.getElementById('it-time').innerText = itTimeStr;
+        document.getElementById('it-date').innerText = itDateStr + " CET +1:00";
     }
 
-    setInterval(updateTime, 1000);
-    updateTime();
+    setInterval(updateClock, 1000);
+    updateClock();
 
     // 導覽切換
     function go(n) {
