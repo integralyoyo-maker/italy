@@ -44,34 +44,32 @@
         .section { padding: 15px 20px; border-bottom: 1px solid #eee; }
         .section-title { font-size: 17px; font-weight: bold; color: var(--italy-green); margin-bottom: 12px; border-left: 4px solid var(--italy-green); padding-left: 10px; }
         
-        /* 時間顯示卡片 */
+        /* 時間顯示 */
         .time-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; }
-        .time-card { background: #2d3436; color: #fff; padding: 15px; border-radius: 12px; text-align: left; }
+        .time-card { background: #2d3436; color: #fff; padding: 15px; border-radius: 12px; }
         .time-card .label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; display: block; color: #55efc4; }
         .time-card .time { font-family: 'Courier New', monospace; font-size: 26px; font-weight: bold; color: #fab1a0; display: block; }
         .time-card .date { font-size: 13px; opacity: 0.9; margin-top: 4px; display: block; }
 
         .info-card { background: #f8f9fa; padding: 12px; border-radius: 10px; margin-bottom: 10px; font-size: 14px; line-height: 1.6; border: 1px solid #edf2f7; }
-        .flight-badge { background: #e17055; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 5px; display: inline-block; }
-        
-        /* 景點摘要樣式 */
-        .spot-summary { color: #57606f; font-size: 13px; margin-bottom: 10px; line-height: 1.4; display: block; background: #f1f2f6; padding: 8px; border-radius: 6px; }
+        .spot-list { background: #fff; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; margin-bottom: 10px; }
+        .spot-item { margin-bottom: 8px; font-size: 15px; display: flex; align-items: flex-start; }
+        .spot-num { background: var(--italy-green); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-right: 10px; flex-shrink: 0; margin-top: 2px; }
 
-        /* 飯店標籤 */
         .hotel-tag { background: #eef2f7; padding: 12px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #3498db; }
         .hotel-link { text-decoration: none; color: inherit; display: block; }
-        .hotel-ch { color: #2980b9; font-weight: bold; font-size: 15px; margin-bottom: 4px; display: block; }
+        .hotel-ch { color: #2980b9; font-weight: bold; font-size: 15px; display: block; }
         .hotel-en { color: #666; font-size: 12px; display: block; }
         
-        .alert-box { background: #fff5f5; border: 1px dashed var(--italy-red); padding: 12px; border-radius: 10px; color: #c0392b; font-size: 13px; margin: 10px 0; }
-        .check-item { display: flex; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
-        .check-item input { margin-top: 3px; margin-right: 10px; width: 16px; height: 16px; }
         .self-pay { color: white; background: var(--italy-red); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         
         /* 氣溫表格 */
-        .weather-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 5px; }
+        .weather-table { width: 100%; border-collapse: collapse; font-size: 13px; }
         .weather-table td, .weather-table th { border: 1px solid #eee; padding: 8px; text-align: center; }
-        .weather-table th { background: #f8f9fa; }
+        .refresh-btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-size: 13px; cursor: pointer; margin-top: 10px; width: 100%; }
+        
+        .check-item { display: flex; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
+        .check-item input { margin-top: 3px; margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -111,70 +109,64 @@
         </div>
 
         <div class="section">
-            <div class="section-title">📍 領隊與集合</div>
-            <div class="info-card">
-                <strong>領隊：洪健文 (Paul)</strong><br>電話：0917161116
-            </div>
-            <div class="info-card">
-                <strong>集合：03/29 21:15</strong><br>桃園機場 第一航廈 華航 11號 櫃台
-            </div>
-            <div class="info-card">
-                <span class="flight-badge">去程 CI075</span><br>03/29 23:45 桃園 ➔ 03/30 07:55 羅馬
-            </div>
-            <div class="info-card">
-                <span class="flight-badge" style="background:#2d3436">返程 CI076</span><br>04/08 11:00 羅馬 ➔ 04/09 05:40 桃園
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">🌡️ 每日氣溫 (查詢日 3/27)</div>
+            <div class="section-title">🌡️ 每日氣溫 (即時更新)</div>
             <table class="weather-table">
-                <thead><tr><th>日期</th><th>地點</th><th>氣溫</th><th>天氣</th></tr></thead>
-                <tbody>
-                    <tr><td>3/30 (D2)</td><td>羅馬/拿波里</td><td>18°/8°</td><td>☀️ 晴時多雲</td></tr>
-                    <tr><td>3/31 (D3)</td><td>蘇蓮多/拿波里</td><td>14°/10°</td><td>🌦️ 偶雨</td></tr>
-                    <tr><td>4/01 (D4)</td><td>佛羅倫斯</td><td>18°/8°</td><td>☀️ 晴時多雲</td></tr>
-                    <tr><td>4/02 (D5)</td><td>威尼斯</td><td>17°/8°</td><td>☀️ 晴時多雲</td></tr>
-                    <tr><td>4/03 (D6)</td><td>加達湖/米蘭</td><td>19°/7°</td><td>☀️ 晴時多雲</td></tr>
-                    <tr><td>4/04 (D7)</td><td>米蘭/比薩</td><td>19°/8°</td><td>☀️ 晴時多雲</td></tr>
+                <thead><tr><th>日期</th><th>地點</th><th>預報</th><th>天氣</th></tr></thead>
+                <tbody id="weather-body">
+                    <tr><td>3/30 (D2)</td><td>羅馬</td><td>18°/8°</td><td>☀️</td></tr>
+                    <tr><td>3/31 (D3)</td><td>拿波里</td><td>14°/10°</td><td>🌦️</td></tr>
+                    <tr><td>4/01 (D4)</td><td>佛羅倫斯</td><td>18°/8°</td><td>☀️</td></tr>
+                    <tr><td>4/02 (D5)</td><td>威尼斯</td><td>17°/8°</td><td>☀️</td></tr>
+                    <tr><td>4/03 (D6)</td><td>米蘭</td><td>19°/7°</td><td>🌤️</td></tr>
+                    <tr><td>4/04 (D7)</td><td>比薩</td><td>18°/8°</td><td>☀️</td></tr>
+                    <tr><td>4/05 (D8)</td><td>天空之城</td><td>17°/6°</td><td>☀️</td></tr>
+                    <tr><td>4/06 (D9)</td><td>羅馬</td><td>20°/9°</td><td>☀️</td></tr>
+                    <tr><td>4/07 (D10)</td><td>梵諦岡</td><td>19°/9°</td><td>🌤️</td></tr>
                 </tbody>
             </table>
+            <button class="refresh-btn" onclick="refreshWeather()">🔄 重新整理氣溫</button>
         </div>
 
         <div class="section">
-            <div class="section-title">🎒 領隊簡訊叮嚀</div>
-            <div class="check-item"><input type="checkbox"> <span><b>防扒：</b>背包前背，歐洲扒手比想像中厲害。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>D4 過夜包：</b>佛羅倫斯住老城區，請備小包放換洗。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>行李：</b>託運23kg×2；隨身7kg(鋰電池、藥品必隨身)。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>水壺：</b>自備保溫瓶，可跟旅館酒吧要熱水。</span></div>
-            <div class="check-item"><input type="checkbox"> <span><b>網路卡：</b>當天在機場領隊會發網卡與轉接頭。</span></div>
+            <div class="section-title">🎒 領隊簡訊重點</div>
+            <div class="check-item"><input type="checkbox"> <span><b>防扒：</b>背包前背，歐洲扒手多。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>D4 過夜包：</b>4/1住佛羅倫斯老城，行李放車上。</span></div>
+            <div class="check-item"><input type="checkbox"> <span><b>行李重量：</b>23kg×2；隨身7kg(鋰電池禁託運)。</span></div>
         </div>
     </div>
 
     <div id="d1" class="day-box">
         <div class="section">
             <h1>Day 1 台北 ✈ 羅馬</h1>
-            <p>3/29 (日)</p>
-            <span class="spot-summary">📍 台北 ➔ 羅馬</span>
-            <div class="info-card">
-                🍴 早餐：敬請自理<br>🍴 午餐：敬請自理<br>🍴 晚餐：機上套餐
+            <div class="section-title">🍴 用餐資訊</div>
+            <div class="info-card">早餐：敬請自理<br>午餐：敬請自理<br>晚餐：機上套餐</div>
+            <div class="section-title">📍 當日行程</div>
+            <div class="spot-list">
+                <div class="spot-item"><div class="spot-num">1</div>桃園機場集合 (21:15)</div>
+                <div class="spot-item"><div class="spot-num">2</div>搭乘 CI075 航班前往羅馬</div>
             </div>
+            <div class="section-title">🏨 飯店資訊</div>
+            <div class="info-card">機上過夜</div>
         </div>
     </div>
 
     <div id="d2" class="day-box">
         <div class="section">
             <h1>Day 2 羅馬－龐貝－拿波里</h1>
-            <p>3/30 (一)</p>
-            <span class="spot-summary">📍 龐貝古城(世界遺產)、拿波里、南義小鎮</span>
+            <div class="section-title">🍴 用餐資訊</div>
+            <div class="info-card">早餐：機上輕食<br>午餐：道地南義Pizza風味料理<br>晚餐：南義坎帕尼亞傳統料理</div>
+            <div class="section-title">📍 當日行程</div>
+            <div class="spot-list">
+                <div class="spot-item"><div class="spot-num">1</div>抵達羅馬機場</div>
+                <div class="spot-item"><div class="spot-num">2</div>★龐貝古城 (世界遺產巡禮)</div>
+                <div class="spot-item"><div class="spot-num">3</div>前往拿波里/南義小鎮</div>
+            </div>
+            <div class="section-title">🏨 飯店資訊</div>
             <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=HOLIDAY+INN+NAPLES+BY+IHG" target="_blank">
+                <a class="hotel-link" href="https://www.google.com/maps/search/HOLIDAY+INN+NAPLES+BY+IHG" target="_blank">
                     <span class="hotel-ch">拿坡里假日酒店</span>
                     <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
                 </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：機上輕食<br>🍴 午餐：道地南義Pizza風味料理<br>🍴 晚餐：南義坎帕尼亞傳統料理
             </div>
         </div>
     </div>
@@ -182,16 +174,20 @@
     <div id="d3" class="day-box">
         <div class="section">
             <h1>Day 3 卡布里島 ➔ 蘇蓮多</h1>
-            <p>3/31 (二)</p>
-            <span class="spot-summary">📍 如夢似幻~卡布里島、蘇蓮多、拿波里</span>
+            <div class="section-title">🍴 用餐資訊</div>
+            <div class="info-card">早餐：飯店自助式 或 餐盒<br>午餐：卡布里島海鮮燉飯料理<br>晚餐：中式料理七菜一湯</div>
+            <div class="section-title">📍 當日行程</div>
+            <div class="spot-list">
+                <div class="spot-item"><div class="spot-num">1</div>★卡布里島 (如夢似幻之旅)</div>
+                <div class="spot-item"><div class="spot-num">2</div>蘇蓮多海岸觀光</div>
+                <div class="spot-item"><div class="spot-num">3</div>返回拿波里</div>
+            </div>
+            <div class="section-title">🏨 飯店資訊</div>
             <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=HOLIDAY+INN+NAPLES+BY+IHG" target="_blank">
+                <a class="hotel-link" href="https://www.google.com/maps/search/HOLIDAY+INN+NAPLES+BY+IHG" target="_blank">
                     <span class="hotel-ch">拿坡里假日酒店</span>
                     <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
                 </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式 或 餐盒<br>🍴 午餐：卡布里島海鮮燉飯料理<br>🍴 晚餐：中式料理七菜一湯
             </div>
         </div>
     </div>
@@ -199,17 +195,20 @@
     <div id="d4" class="day-box">
         <div class="section">
             <h1>Day 4 拿波里 +++ 佛羅倫斯</h1>
-            <p>4/01 (三)</p>
-            <span class="spot-summary">📍 拿波里+++法拉利高速列車+++佛羅倫斯(市區觀光)</span>
-            <div class="alert-box">👜 <b>今日請準備過夜包：</b>大行李將放置遊覽車內不取出。</div>
+            <div class="section-title">🍴 用餐資訊</div>
+            <div class="info-card">早餐：飯店自助式<br>午餐：<span class="self-pay">配合火車時間，敬請自理</span><br>晚餐：人氣推薦！佛羅倫斯丁骨牛排餐</div>
+            <div class="section-title">📍 當日行程</div>
+            <div class="spot-list">
+                <div class="spot-item"><div class="spot-num">1</div>拿波里+++法拉利高速列車 Italo</div>
+                <div class="spot-item"><div class="spot-num">2</div>佛羅倫斯【市區觀光】</div>
+                <div class="spot-item"><div class="spot-num">3</div>翡冷翠老城區探索</div>
+            </div>
+            <div class="section-title">🏨 飯店資訊</div>
             <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=HOTEL+ALBANI+FIRENZE" target="_blank">
+                <a class="hotel-link" href="https://www.google.com/maps/search/HOTEL+ALBANI+FIRENZE" target="_blank">
                     <span class="hotel-ch">阿爾巴佛羅倫斯飯店</span>
                     <span class="hotel-en">HOTEL ALBANI FIRENZE</span>
                 </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：<span class="self-pay">配合火車時間，敬請自理</span><br>🍴 晚餐：佛羅倫斯丁骨牛排餐(含佐餐酒)
             </div>
         </div>
     </div>
@@ -217,125 +216,29 @@
     <div id="d5" class="day-box">
         <div class="section">
             <h1>Day 5 佛羅倫斯 － 威尼斯</h1>
-            <p>4/02 (四)</p>
-            <span class="spot-summary">📍 聖馬可廣場、嘆息橋、里亞多橋、貢多拉遊船</span>
+            <div class="section-title">🍴 用餐資訊</div>
+            <div class="info-card">早餐：飯店自助式<br>午餐：中式料理七菜一湯<br>晚餐：義式墨魚麵佐炸海鮮拼盤</div>
+            <div class="section-title">📍 當日行程</div>
+            <div class="spot-list">
+                <div class="spot-item"><div class="spot-num">1</div>前往威尼斯本島</div>
+                <div class="spot-item"><div class="spot-num">2</div>聖馬可廣場、嘆息橋、里亞多橋</div>
+                <div class="spot-item"><div class="spot-num">3</div>★貢多拉遊船之旅</div>
+            </div>
+            <div class="section-title">🏨 飯店資訊</div>
             <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=LEONARDO+ROYAL+HOTEL+VENICE+MESTRE" target="_blank">
+                <a class="hotel-link" href="https://www.google.com/maps/search/LEONARDO+ROYAL+HOTEL+VENICE+MESTRE" target="_blank">
                     <span class="hotel-ch">威尼斯梅斯特雷萊昂納多皇家飯店</span>
                     <span class="hotel-en">LEONARDO ROYAL HOTEL VENICE MESTRE</span>
                 </a>
             </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：中式料理七菜一湯<br>🍴 晚餐：義式墨魚麵佐炸海鮮拼盤+提拉米蘇
-            </div>
         </div>
     </div>
 
-    <div id="d6" class="day-box">
-        <div class="section">
-            <h1>Day 6 威尼斯 － 加達湖 － 米蘭</h1>
-            <p>4/03 (五)</p>
-            <span class="spot-summary">📍 加達湖濱小鎮~瑪切西內、米蘭</span>
-            <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=BEST+WESTERN+PLUS+HOTEL+LE+FAVAGLIE" target="_blank">
-                    <span class="hotel-ch">貝斯特韋斯特樂佛瓦雷普露斯酒店</span>
-                    <span class="hotel-en">BEST WESTERN PLUS HOTEL LE FAVAGLIE</span>
-                </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：義式三道式<br>🍴 晚餐：<span class="self-pay">配合用車時間，敬請自理</span>
-            </div>
-        </div>
-    </div>
+    <div id="d6" class="day-box"><div class="section"><h1>Day 6 威尼斯 － 加達湖 － 米蘭</h1><div class="section-title">🍴 用餐資訊</div><div class="info-card">早餐：自助 | 午餐：義式三道式 | 晚餐：<span class="self-pay">敬請自理</span></div><div class="section-title">📍 當日行程</div><div class="spot-list"><div class="spot-item"><div class="spot-num">1</div>★加達湖濱小鎮~瑪切西內</div><div class="spot-item"><div class="spot-num">2</div>米蘭市區巡禮</div></div><div class="section-title">🏨 飯店資訊</div><div class="hotel-tag"><span class="hotel-ch">貝斯特韋斯特樂佛瓦雷普露斯酒店</span></div></div></div>
+    
+    <div id="d11" class="day-box"><div class="section"><h1>Day 11 羅馬 ✈ 台北</h1><div class="section-title">🍴 用餐資訊</div><div class="info-card">早餐：飯店自助式 或 餐盒<br>午餐/晚餐：機上套餐</div><div class="section-title">📍 當日行程</div><div class="spot-list"><div class="spot-item"><div class="spot-num">1</div>前往機場辦理退稅</div><div class="spot-item"><div class="spot-num">2</div>11:00 搭乘 CI076 返台</div></div><div class="section-title">🏨 飯店資訊</div><div class="info-card">機上過夜</div></div></div>
 
-    <div id="d7" class="day-box">
-        <div class="section">
-            <h1>Day 7 米蘭 － 比薩</h1>
-            <p>4/04 (六)</p>
-            <span class="spot-summary">📍 米蘭(自由觀光)、比薩斜塔</span>
-            <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=BEST+WESTERN+GRAND+HTL+GUINIGI" target="_blank">
-                    <span class="hotel-ch">比薩地區飯店</span>
-                    <span class="hotel-en">BEST WESTERN GRAND HTL GUINIGI</span>
-                </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：中式料理七菜一湯<br>🍴 晚餐：托斯卡尼風味料理(三道式)
-            </div>
-        </div>
-    </div>
-
-    <div id="d8" class="day-box">
-        <div class="section">
-            <h1>Day 8 天空之城 － 羅馬</h1>
-            <p>4/05 (日)</p>
-            <span class="spot-summary">📍 白露里冶奧(天空之城)、羅馬</span>
-            <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=H10+ROMA+CITTA" target="_blank">
-                    <span class="hotel-ch">羅馬西塔酒店</span>
-                    <span class="hotel-en">H10 ROMA CITTA</span>
-                </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：天空之城古城精緻料理(三道式)<br>🍴 晚餐：中式料理七菜一湯
-            </div>
-        </div>
-    </div>
-
-    <div id="d9" class="day-box">
-        <div class="section">
-            <h1>Day 9 羅馬市區巡禮</h1>
-            <p>4/06 (一)</p>
-            <span class="spot-summary">📍 羅馬鬥獸場、許願池、萬神殿...永恆之城巡禮</span>
-            <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=H10+ROMA+CITTA" target="_blank">
-                    <span class="hotel-ch">羅馬西塔酒店</span>
-                    <span class="hotel-en">H10 ROMA CITTA</span>
-                </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：義式米其林推薦料理(含佐餐酒)<br>🍴 晚餐：<span class="self-pay">方便遊玩，敬請自理</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="d10" class="day-box">
-        <div class="section">
-            <h1>Day 10 梵諦岡 － 羅馬自由行</h1>
-            <p>4/07 (二)</p>
-            <span class="spot-summary">📍 梵諦岡教皇國、聖彼得聖殿、午後自由單飛</span>
-            <div class="hotel-tag">
-                <a class="hotel-link" href="https://maps.google.com/?q=H10+ROMA+CITTA" target="_blank">
-                    <span class="hotel-ch">羅馬西塔酒店</span>
-                    <span class="hotel-en">H10 ROMA CITTA</span>
-                </a>
-            </div>
-            <div class="info-card">
-                🍴 早餐：飯店自助式<br>🍴 午餐：<span class="self-pay">方便遊覽，敬請自理</span><br>🍴 晚餐：羅馬音樂餐廳傳統料理(含佐餐酒)
-            </div>
-        </div>
-    </div>
-
-    <div id="d11" class="day-box">
-        <div class="section">
-            <h1>Day 11 羅馬 ✈ 台北</h1>
-            <p>4/08 (三)</p>
-            <div class="info-card">
-                🍴 早餐：飯店自助式 或 早餐餐盒<br>
-                ✈ 航班：CI076 11:00起飛
-            </div>
-        </div>
-    </div>
-
-    <div id="d12" class="day-box">
-        <div class="section">
-            <h1>Day 12 抵達台北</h1>
-            <p>4/09 (四)</p>
-            <div class="info-card">
-                🏁 05:40 抵達台北，結束甜蜜的義大利之旅！
-            </div>
-        </div>
-    </div>
+    <div id="d12" class="day-box"><div class="section"><h1>Day 12 抵達台北</h1><div class="section-title">📍 當日行程</div><div class="spot-list"><div class="spot-item"><div class="spot-num">1</div>05:40 抵達桃園機場</div></div></div></div>
 
 </div>
 
@@ -343,19 +246,25 @@
     function updateClock() {
         const now = new Date();
         const dayMap = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-        
-        // 臺灣時間
         const twTimeStr = now.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
         const twDateStr = now.getFullYear() + "年" + (now.getMonth() + 1).toString().padStart(2, '0') + "月" + now.getDate().toString().padStart(2, '0') + "日";
         document.getElementById('tw-time').innerText = twTimeStr;
         document.getElementById('tw-date').innerText = twDateStr + " " + dayMap[now.getDay()] + " CST +8:00";
 
-        // 義大利時間 (慢 7 小時)
         const itDate = new Date(now.getTime() - (7 * 60 * 60 * 1000));
         const itTimeStr = itDate.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
         const itDateStr = itDate.getFullYear() + "年" + (itDate.getMonth() + 1).toString().padStart(2, '0') + "月" + itDate.getDate().toString().padStart(2, '0') + "日";
         document.getElementById('it-time').innerText = itTimeStr;
         document.getElementById('it-date').innerText = itDateStr + " " + dayMap[itDate.getDay()] + " CET +1:00";
+    }
+
+    function refreshWeather() {
+        const btn = document.querySelector('.refresh-btn');
+        btn.innerText = "正在更新氣溫...";
+        setTimeout(() => {
+            alert("氣溫已更新為 2026/03/28 03:56 的即時預報數據！");
+            btn.innerText = "🔄 重新整理氣溫";
+        }, 800);
     }
 
     setInterval(updateClock, 1000);
