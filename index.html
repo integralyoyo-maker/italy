@@ -3,91 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇮🇹 經典義大利 12 日行前懶人包</title>
+    <title>🇮🇹 義大利蜜月 12 日手機版手冊</title>
     <style>
-        :root { --italy-green: #008C45; --italy-red: #CD212A; --text-dark: #2D3436; }
-        body { font-family: -apple-system, "Noto Sans TC", sans-serif; background-color: #f0f2f5; margin: 0; padding: 15px; color: var(--text-dark); }
-        .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid var(--italy-green); max-width: 650px; margin: 0 auto; }
-        h1 { color: var(--italy-red); text-align: center; font-size: 24px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
-        h2 { border-left: 6px solid var(--italy-green); padding-left: 12px; font-size: 18px; color: #005a2d; margin-top: 25px; }
+        :root { --italy-green: #008C45; --italy-red: #CD212A; --bg: #f7f9fb; }
+        body { font-family: -apple-system, "Noto Sans TC", sans-serif; margin: 0; background: var(--bg); color: #333; padding-top: 85px; }
         
-        /* 氣溫表樣式 */
-        .weather-header { display: flex; justify-content: space-between; align-items: center; }
-        .refresh-btn { font-size: 13px; color: var(--italy-green); cursor: pointer; border: 1px solid var(--italy-green); padding: 2px 8px; border-radius: 20px; text-decoration: none; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
-        th, td { border: 1px solid #eee; padding: 10px 5px; text-align: center; }
-        th { background-color: #f8f9fa; }
-        .highlight-red { color: var(--italy-red); font-weight: bold; }
+        /* 手機頂部滑動選單 */
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex; overflow-x: auto; white-space: nowrap;
+            z-index: 1000; padding: 10px 0; -webkit-overflow-scrolling: touch;
+        }
+        .nav-item {
+            display: inline-block; padding: 8px 15px; margin: 0 5px;
+            border-radius: 20px; background: #eee; font-size: 13px; cursor: pointer;
+        }
+        .nav-item.active { background: var(--italy-green); color: white; font-weight: bold; }
 
-        /* 行程亮點清單 */
-        .highlight-list { background: #fdf2f2; border-radius: 10px; padding: 15px; margin: 15px 0; font-size: 14px; border-left: 5px solid var(--italy-red); }
+        /* 內容區塊 */
+        .content-wrap { padding: 15px; }
+        .day-box { display: none; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: slideUp 0.3s ease; }
+        .day-box.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 20px; color: var(--italy-red); margin: 0 0 10px 0; border-left: 5px solid var(--italy-green); padding-left: 10px; }
+        .date-tag { font-size: 14px; color: #666; margin-bottom: 15px; display: block; }
         
-        /* 檢查清單 */
-        .check-item { display: flex; align-items: center; background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #eee; }
-        input[type="checkbox"] { width: 18px; height: 18px; margin-right: 12px; accent-color: var(--italy-green); }
-        .footer { text-align: center; font-size: 12px; color: #999; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .info-card { background: #fff9e6; border: 1px solid #ffeeba; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 14px; }
+        .meal { background: #f0f2f5; padding: 10px; border-radius: 8px; font-size: 13px; margin-top: 15px; font-weight: bold; }
+        .highlight { color: var(--italy-red); font-weight: bold; }
+        .point { margin-bottom: 8px; font-size: 15px; line-height: 1.6; }
+        .tag { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 5px; }
+
+        /* 隱藏捲動條但保留功能 */
+        .top-nav::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>🇮🇹 經典義大利 12 日行前懶人包</h1>
-    <p class="subtitle">出發日期：2026 / 03 / 29 | 領隊：Paul (洪健文)</p>
+<div class="top-nav" id="topNav">
+    <div class="nav-item active" onclick="go(1)">D1 3/29</div>
+    <div class="nav-item" onclick="go(2)">D2 3/30</div>
+    <div class="nav-item" onclick="go(3)">D3 3/31</div>
+    <div class="nav-item" onclick="go(4)">D4 4/1</div>
+    <div class="nav-item" onclick="go(5)">D5 4/2</div>
+    <div class="nav-item" onclick="go(6)">D6 4/3</div>
+    <div class="nav-item" onclick="go(7)">D7 4/4</div>
+    <div class="nav-item" onclick="go(8)">D8 4/5</div>
+    <div class="nav-item" onclick="go(9)">D9 4/6</div>
+    <div class="nav-item" onclick="go(10)">D10 4/7</div>
+    <div class="nav-item" onclick="go(11)">D11 4/8</div>
+    <div class="nav-item" onclick="go(12)">D12 4/9</div>
+</div>
 
-    <div class="highlight-list">
-        <strong>✨ 說明會行程重點亮點：</strong><br>
-        • 羅馬鬥獸場、朝聖梵諦岡、絕美卡布里島、失落古城龐貝。<br>
-        • 天空之城、加達湖濱美鎮、巴爾多山纜車體驗。
+<div class="content-wrap">
+    <div id="d1" class="day-box active">
+        <h1>台北 ✈ 羅馬</h1>
+        <span class="date-tag">3/29 (日)</span>
+        <div class="info-card">💡 出發前七天請繳交護照。今日夜宿機上，迎接義大利洗禮。</div>
+        <div class="point">🔸 歐洲巴士空間有限，建議帶<b>一件</b>大行李。</div>
+        <div class="point">🔸 飯店熱水多為鍋爐式，請分流盥洗。</div>
+        <div class="point">🔸 老城區多為徒步觀光，石板路多，請穿舒適鞋子。</div>
+        <div class="meal">🍴 晚餐：機上套餐</div>
     </div>
 
-    <div class="weather-header">
-        <h2>🌡️ 各景點氣溫預報</h2>
-        <a href="#" class="refresh-btn" onclick="location.reload()">🔄 重新整理氣溫</a>
+    <div id="d2" class="day-box">
+        <h1>羅馬－龐貝－拿波里</h1>
+        <span class="date-tag">3/30 (一)</span>
+        <div class="point"><span class="tag">世界遺產</span> <b>龐貝古城：</b> 探訪西元79年火山爆發沉睡千年的古城。</div>
+        <div class="point">🔸 <b>拿波里：</b> 參觀新堡、聖卡洛劇院、翁貝托一世拱廊。</div>
+        <div class="meal">🍴 午：南義Pizza / 晚：坎帕尼亞料理</div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>天數</th>
-                <th>日期地點</th>
-                <th>氣溫 (低/高)</th>
-                <th>天氣狀況</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>D2</td><td>3/30 羅馬 / 拿波里</td><td>8° / 18°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D3</td><td>3/31 蘇蓮多 / 拿波里</td><td>8° / 14°</td><td>☔ <span class="highlight-red">晴時多雲偶雨</span></td></tr>
-            <tr><td>D4</td><td>4/01 拿波里 / 佛羅倫斯</td><td>8° / 18°</td><td>🌦️ 轉晴</td></tr>
-            <tr><td>D5</td><td>4/02 威尼斯</td><td>8° / 17°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D6</td><td>4/03 加達湖 / 米蘭</td><td>10° / 19°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D7</td><td>4/04 米蘭 / 比薩</td><td>8° / 19°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D8</td><td>4/05 天空之城 / 羅馬</td><td>6° / 17°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D9</td><td>4/06 羅馬</td><td>9° / 20°</td><td>☀️ 晴時多雲</td></tr>
-        </tbody>
-    </table>
-    <p style="font-size: 12px; color: #666;">※ 高山上最低探 <span class="highlight-red">-8°C</span>，請備厚外套。</p>
 
-    <h2>🎒 打包 Check-list (可點擊勾選)</h2>
-    <div class="check-item"><input type="checkbox"><span>護照 (若自帶務必確認)</span></div>
-    <div class="check-item"><input type="checkbox"><span>保暖外套 & 洋蔥式衣物</span></div>
-    <div class="check-item"><input type="checkbox"><span>舒適防滑防潑水休閒鞋 (石板路多)</span></div>
-    <div class="check-item"><input type="checkbox"><span>鋰電池、行動電源 (禁託運)</span></div>
-    <div class="check-item"><input type="checkbox"><span>摺疊傘 & 每日必用藥品 (隨身)</span></div>
-    <div class="check-item"><input type="checkbox"><span>D4 佛羅倫斯過夜小包 (大行李放車上)</span></div>
-    <div class="check-item"><input type="checkbox"><span>保溫瓶 (可向旅館酒吧要熱水)</span></div>
-    <div class="check-item"><input type="checkbox"><span>貼身防扒腰包 (後背包請往前背)</span></div>
+    <div id="d3" class="day-box">
+        <h1>卡布里島 ➔ 蘇蓮多</h1>
+        <span class="date-tag">3/31 (二)</span>
+        <div class="info-card">🌊 藍洞機率約3-4成。若無法進入將啟動纜車或博物館方案。</div>
+        <div class="point">🔸 <b>卡布里島：</b> 被譽為「蜜月聖地」，地中海最美小島。</div>
+        <div class="point">🔸 <b>蘇蓮多：</b> 充滿檸檬香氣的濱海城，適合吃 Gelato。</div>
+        <div class="meal">🍴 午：海鮮燉飯 / 晚：中式七菜一湯</div>
+    </div>
 
-    <h2>⚠️ 領隊特別叮嚀</h2>
-    <ul style="padding-left: 20px; font-size: 14px;">
-        <li><strong>機場領取：</strong>導覽耳機、行李束帶、行李牌、歐洲轉接頭、網卡。</li>
-        <li><strong>行李限制：</strong>華航託運每人 2 件 (每件 < 23kg)，隨身限 7kg。</li>
-        <li><strong>防扒提醒：</strong>歐洲扒手非常厲害，包包務必往前背。</li>
-    </ul>
+    <div id="d4" class="day-box">
+        <h1>拿波里 +++ 佛羅倫斯</h1>
+        <span class="date-tag">4/1 (三)</span>
+        <div class="info-card">🎒 <span class="highlight">過夜包提醒：</span> 今晚住老城區大行李放車上，請備小包。</div>
+        <div class="point">🔸 <b>法拉利火車：</b> 體驗 Italo 時速 300km 超跑級內裝。</div>
+        <div class="point">🔸 <b>市區導覽：</b> 聖母百花大教堂、喬托鐘樓、老橋。</div>
+        <div class="meal">🍴 晚：佛羅倫斯丁骨牛排(含酒)</div>
+    </div>
 
-    <div class="footer">
-        祝我們蜜月之旅圓滿順利 ❤️
+    <div id="d5" class="day-box">
+        <h1>佛羅倫斯 － 威尼斯</h1>
+        <span class="date-tag">4/2 (四)</span>
+        <div class="point"><span class="tag">浪漫水都</span> <b>威尼斯：</b> 聖馬可廣場、嘆息橋、里亞多橋。</div>
+        <div class="point">🔸 <b>貢多拉船：</b> 特別贈送搭乘燕尾船穿梭水巷 (5人1艘)。</div>
+        <div class="point">🔸 <b>自由時光：</b> 不進水晶店，保留更多自遊時間。</div>
+        <div class="meal">🍴 晚：墨魚麵+炸海鮮+提拉米蘇</div>
+    </div>
+
+    <div id="d6" class="day-box">
+        <h1>威尼斯 － 加達湖 － 米蘭</h1>
+        <span class="date-tag">4/3 (五)</span>
+        <div class="point">🔸 <b>瑪切西內：</b> 加達湖畔最美小鎮，鵝卵石巷弄美不勝收。</div>
+        <div class="point">🔸 <b>巴爾多山纜車：</b> 360度旋轉纜車俯瞰阿爾卑斯湖光山色。</div>
+        <div class="meal">🍴 午：義式三道式 / 晚：米蘭自理</div>
+    </div>
+
+    <div id="d7" class="day-box">
+        <h1>米蘭 － 比薩</h1>
+        <span class="date-tag">4/4 (六)</span>
+        <div class="point">🔸 <b>米蘭：</b> 時尚之都，參觀米蘭大教堂、艾曼紐二世拱廊。</div>
+        <div class="point">🔸 <b>比薩斜塔：</b> 世界建築奇蹟，奇蹟廣場雪白建築群。</div>
+        <div class="meal">🍴 晚：托斯卡尼風味料理</div>
+    </div>
+
+    <div id="d8" class="day-box">
+        <h1>比薩 － 天空之城 － 羅馬</h1>
+        <span class="date-tag">4/5 (日)</span>
+        <div class="point">🔸 <b>白露里治奧：</b> 宮崎駿「天空之城」場景重現，遺世獨立。</div>
+        <div class="point">🔸 <b>羅馬：</b> 抵達永恆之城，展開市區觀光。</div>
+        <div class="meal">🍴 午：天空之城精緻料理 / 晚：中式料理</div>
+    </div>
+
+    <div id="d9" class="day-box">
+        <h1>璀璨永恆之城：羅馬</h1>
+        <span class="date-tag">4/6 (一)</span>
+        <div class="info-card">☕ 特別贈送：金杯咖啡 1 杯。</div>
+        <div class="point">🔸 <b>入內參觀：</b> 羅馬競技場 (實名制須持護照)。</div>
+        <div class="point">🔸 <b>經典場景：</b> 萬神殿、許願池、西班牙廣場。</div>
+        <div class="meal">🍴 午：米其林推薦 / 晚：自理</div>
+    </div>
+
+    <div id="d10" class="day-box">
+        <h1>梵諦岡 － 自由單飛時光</h1>
+        <span class="date-tag">4/7 (二)</span>
+        <div class="info-card">⚠️ 進入聖彼得大教堂禁穿無袖、短褲短裙。</div>
+        <div class="point">🔸 <b>世界最小國：</b> 聖彼得大教堂，米開朗基羅「聖殤」。</div>
+        <div class="point">🔸 <b>單飛時間：</b> 下午羅馬自由活動，享受巷弄時光。</div>
+        <div class="meal">🍴 晚：羅馬音樂餐廳料理(含酒)</div>
+    </div>
+
+    <div id="d11" class="day-box">
+        <h1>羅馬 ✈ 台北</h1>
+        <span class="date-tag">4/8 (三)</span>
+        <div class="point">🔸 整理行裝，前往機場辦理退稅手續。</div>
+        <div class="point">🔸 帶著滿滿蜜月回憶飛往台北。</div>
+        <div class="meal">🍴 晨：飯店自助或餐盒</div>
+    </div>
+
+    <div id="d12" class="day-box">
+        <h1>抵達台北</h1>
+        <span class="date-tag">4/9 (四)</span>
+        <div class="point">🔸 平安抵台，結束 12 天夢幻蜜月旅程！</div>
     </div>
 </div>
+
+<script>
+    function go(n) {
+        // 切換內容
+        document.querySelectorAll('.day-box').forEach(b => b.classList.remove('active'));
+        document.getElementById('d' + n).classList.add('active');
+        // 切換按鈕
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        // 滾動內容到頂部
+        window.scrollTo(0,0);
+    }
+</script>
 
 </body>
 </html>
