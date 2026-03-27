@@ -22,10 +22,10 @@
         .nav-item.active { background: var(--italy-green); color: white; font-weight: bold; }
         .top-nav::-webkit-scrollbar { display: none; }
 
-        /* 內容容器 */
         .content-wrap { padding: 15px; }
-        .day-box { display: none; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: slideUp 0.15s ease; }
+        .day-box { display: none; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: slideUp 0.2s ease; }
         .day-box.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         h1 { font-size: 20px; color: var(--italy-red); margin: 0 0 5px 0; border-left: 5px solid var(--italy-green); padding-left: 10px; }
         .date-info { font-size: 14px; color: #666; margin-bottom: 15px; display: block; }
@@ -33,16 +33,20 @@
         .section-title { font-size: 16px; font-weight: bold; color: var(--italy-green); margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .info-card { background: #fff9e6; border: 1px solid #ffeeba; padding: 12px; border-radius: 10px; margin: 10px 0; font-size: 14px; line-height: 1.6; }
         
-        /* 用餐與飯店表格 */
+        /* 氣溫表樣式 */
+        .weather-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        .weather-table td { border: 1px solid #eee; padding: 8px; text-align: center; }
+
+        /* 飯店連結樣式 */
+        .hotel-tag { background: #eef2f7; padding: 12px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #3498db; }
+        .hotel-link { text-decoration: none; color: inherit; display: block; }
+        .hotel-ch { color: #2980b9; font-weight: bold; font-size: 15px; margin-bottom: 4px; display: block; }
+        .hotel-en { color: #666; font-size: 12px; display: block; }
+
+        /* 用餐表格 */
         .meal-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
         .meal-table td { padding: 8px; border-bottom: 1px solid #f1f1f1; }
-        .label { color: #888; width: 40px; }
         .self-pay { color: white; background: var(--italy-red); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        
-        /* 飯店超連結樣式 */
-        .hotel-tag { background: #eef2f7; padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 10px; border-left: 4px solid #3498db; }
-        .hotel-link { color: #2980b9; text-decoration: none; font-weight: bold; display: flex; align-items: center; }
-        .hotel-link::before { content: '📍 '; margin-right: 5px; }
 
         /* Check-list */
         .check-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
@@ -62,27 +66,47 @@
 </div>
 
 <div class="content-wrap">
+    
     <div id="d0" class="day-box active">
-        <h1>🇮🇹 蜜月準備清單</h1>
-        <div class="info-card">🚩 <b>防搶提醒：</b> 包包必往前背！護照影本與正本分開放。</div>
-        <div class="section-title">🎒 必備物品</div>
-        <div class="check-item"><input type="checkbox"> 護照 / 歐元現金 / 信用卡</div>
-        <div class="check-item"><input type="checkbox"> 義大利轉接頭 (雙圓頭)</div>
-        <div class="check-item"><input type="checkbox"> <b>D4 過夜包</b> (今日大行李放車上)</div>
-        <div class="check-item"><input type="checkbox"> 個人藥品、保溫杯、雨傘</div>
+        <h1>🇮🇹 蜜月出發準備</h1>
+        <div class="info-card">
+            <strong>🚩 領隊 Paul 重點提醒：</strong><br>
+            1. 機場領取：耳機、行李帶、轉接頭、網卡。<br>
+            2. 包包往前背才是自己的！小心扒手。<br>
+            3. 備妥護照影本，與正本分開存放。
+        </div>
+
+        <div class="section-title">🌡️ 義大利最新氣溫參考</div>
+        <table class="weather-table">
+            <tr style="background:#f8f9fa; font-weight:bold;"><td>地點</td><td>低溫/高溫</td><td>天氣</td></tr>
+            <tr><td>羅馬</td><td>8° / 18°</td><td>☀️ 晴</td></tr>
+            <tr><td>拿波里</td><td>8° / 14°</td><td>☔ 偶雨</td></tr>
+            <tr><td>佛羅倫斯</td><td>8° / 18°</td><td>☁️ 陰</td></tr>
+            <tr><td>威尼斯</td><td>8° / 17°</td><td>☀️ 晴</td></tr>
+            <tr><td>米蘭</td><td>7° / 19°</td><td>☀️ 晴</td></tr>
+        </table>
+        <p style="font-size: 11px; color: #888;">※ 高山上最低探 -8°C，請採洋蔥式穿法。</p>
+
+        <div class="section-title">🎒 行李檢查表</div>
+        <div class="check-item"><input type="checkbox"> 護照正本、歐元現金、信用卡</div>
+        <div class="check-item"><input type="checkbox"> 轉接頭、行動電源 (禁託運)</div>
+        <div class="check-item"><input type="checkbox"> <b>D4 過夜包 (小行李)</b></div>
+        <div class="check-item"><input type="checkbox"> 個人常備藥、保溫瓶、摺疊傘</div>
     </div>
 
     <div id="d2" class="day-box">
         <h1>羅馬－龐貝－拿波里</h1>
         <span class="date-info">3/30 (一)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/9TfQGv5m6L8xU9D8A" target="_blank">
-                HOLIDAY INN NAPLES BY IHG (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Naples" target="_blank">
+                <span class="hotel-ch">拿波里假日酒店 (4星級)</span>
+                <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>南義Pizza風味</td></tr>
-            <tr><td class="label">晚餐</td><td>坎帕尼亞傳統料理</td></tr>
+            <tr><td>早餐：機上輕食</td></tr>
+            <tr><td>午餐：道地南義Pizza風味料理</td></tr>
+            <tr><td>晚餐：南義坎帕尼亞傳統料理</td></tr>
         </table>
     </div>
 
@@ -90,27 +114,32 @@
         <h1>卡布里島 ➔ 蘇蓮多</h1>
         <span class="date-info">3/31 (二)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/9TfQGv5m6L8xU9D8A" target="_blank">
-                HOLIDAY INN NAPLES BY IHG (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Naples" target="_blank">
+                <span class="hotel-ch">拿波里假日酒店 (4星級)</span>
+                <span class="hotel-en">HOLIDAY INN NAPLES BY IHG</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>海鮮燉飯</td></tr>
-            <tr><td class="label">晚餐</td><td>中式七菜一湯</td></tr>
+            <tr><td>早餐：飯店自助式 或 餐盒</td></tr>
+            <tr><td>午餐：卡布里島海鮮燉飯料理</td></tr>
+            <tr><td>晚餐：中式料理七菜一湯</td></tr>
         </table>
     </div>
 
     <div id="d4" class="day-box">
         <h1>拿波里 +++ 佛羅倫斯</h1>
         <span class="date-info">4/1 (三)</span>
+        <div class="info-card">⚠️ <b>提醒：</b> 今晚行李放車上，僅帶過夜包進老城區。</div>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/K8J4zF3rNq4e7xZ47" target="_blank">
-                Hotel Albani Firenze (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Hotel+Albani+Firenze" target="_blank">
+                <span class="hotel-ch">阿爾巴佛羅倫斯飯店 (4星級)</span>
+                <span class="hotel-en">Hotel Albani Firenze</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td><span class="self-pay">配合火車，敬請自理</span></td></tr>
-            <tr><td class="label">晚餐</td><td>佛羅倫斯丁骨牛排(含酒)</td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：<span class="self-pay">配合火車時間，敬請自理</span></td></tr>
+            <tr><td>晚餐：佛羅倫斯丁骨牛排餐(含酒)</td></tr>
         </table>
     </div>
 
@@ -118,13 +147,15 @@
         <h1>佛羅倫斯 － 威尼斯</h1>
         <span class="date-info">4/2 (四)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/7g6U8mQ5nZ6e8xR77" target="_blank">
-                LEONARDO ROYAL HOTEL VENICE MESTRE (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Leonardo+Royal+Hotel+Venice+Mestre" target="_blank">
+                <span class="hotel-ch">威尼斯梅斯特雷萊昂納多皇家飯店 (4星級)</span>
+                <span class="hotel-en">LEONARDO ROYAL HOTEL VENICE MESTRE</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>中式料理</td></tr>
-            <tr><td class="label">晚餐</td><td>墨魚麵佐炸海鮮</td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：中式料理七菜一湯</td></tr>
+            <tr><td>晚餐：墨魚麵佐炸海鮮拼盤</td></tr>
         </table>
     </div>
 
@@ -132,13 +163,15 @@
         <h1>威尼斯 － 加達湖 － 米蘭</h1>
         <span class="date-info">4/3 (五)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/q9fL5rV9nZ3e8xQ8A" target="_blank">
-                BEST WESTERN PLUS HOTEL LE FAVAGLIE (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Best+Western+Plus+Hotel+Le+Favaglie" target="_blank">
+                <span class="hotel-ch">貝斯特韋斯特樂佛瓦雷普露斯酒店 (4星級)</span>
+                <span class="hotel-en">BEST WESTERN PLUS HOTEL LE FAVAGLIE</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>義式三道式</td></tr>
-            <tr><td class="label">晚餐</td><td><span class="self-pay">配合用車，敬請自理</span></td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：義式三道式</td></tr>
+            <tr><td>晚餐：<span class="self-pay">配合用車時間，敬請自理</span></td></tr>
         </table>
     </div>
 
@@ -146,13 +179,15 @@
         <h1>米蘭 － 比薩</h1>
         <span class="date-info">4/4 (六)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/m8K3zN7rPq4e9xX7A" target="_blank">
-                BEST WESTERN GRAND HTL GUINIGI (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=Best+Western+Grand+Hotel+Guinigi" target="_blank">
+                <span class="hotel-ch">比薩地區飯店 (4星級)</span>
+                <span class="hotel-en">BEST WESTERN GRAND HTL GUINIGI</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>中式料理</td></tr>
-            <tr><td class="label">晚餐</td><td>托斯卡尼風味料理</td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：中式料理七菜一湯</td></tr>
+            <tr><td>晚餐：托斯卡尼風味料理</td></tr>
         </table>
     </div>
 
@@ -160,27 +195,31 @@
         <h1>天空之城 － 羅馬</h1>
         <span class="date-info">4/5 (日)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/7N8mPq5nZ4e8xW7A" target="_blank">
-                H10 ROMA CITTA (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=H10+Roma+Citta" target="_blank">
+                <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                <span class="hotel-en">H10 ROMA CITTA</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>古城精緻料理</td></tr>
-            <tr><td class="label">晚餐</td><td>中式料理</td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：天空之城精緻料理</td></tr>
+            <tr><td>晚餐：中式料理七菜一湯</td></tr>
         </table>
     </div>
 
     <div id="d9" class="day-box">
-        <h1>羅馬市區巡禮</h1>
+        <h1>羅馬市區觀光</h1>
         <span class="date-info">4/6 (一)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/7N8mPq5nZ4e8xW7A" target="_blank">
-                H10 ROMA CITTA (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=H10+Roma+Citta" target="_blank">
+                <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                <span class="hotel-en">H10 ROMA CITTA</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td>義式米其林推薦</td></tr>
-            <tr><td class="label">晚餐</td><td><span class="self-pay">方便遊玩，敬請自理</span></td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：米其林推薦料理</td></tr>
+            <tr><td>晚餐：<span class="self-pay">方便遊玩，敬請自理</span></td></tr>
         </table>
     </div>
 
@@ -188,23 +227,31 @@
         <h1>梵諦岡 － 羅馬自由行</h1>
         <span class="date-info">4/7 (二)</span>
         <div class="hotel-tag">
-            <a class="hotel-link" href="https://maps.app.goo.gl/7N8mPq5nZ4e8xW7A" target="_blank">
-                H10 ROMA CITTA (4星)
+            <a class="hotel-link" href="https://www.google.com/maps/search/?api=1&query=H10+Roma+Citta" target="_blank">
+                <span class="hotel-ch">羅馬西塔酒店 (4星級)</span>
+                <span class="hotel-en">H10 ROMA CITTA</span>
             </a>
         </div>
         <table class="meal-table">
-            <tr><td class="label">午餐</td><td><span class="self-pay">自由探索，敬請自理</span></td></tr>
-            <tr><td class="label">晚餐</td><td>音樂餐廳料理</td></tr>
+            <tr><td>早餐：飯店自助式</td></tr>
+            <tr><td>午餐：<span class="self-pay">方便遊覽，敬請自理</span></td></tr>
+            <tr><td>晚餐：羅馬音樂餐廳傳統料理</td></tr>
         </table>
     </div>
 
     <div id="d11" class="day-box">
         <h1>羅馬 ✈ 台北</h1>
-        <p>帶著滿滿回憶與戰利品前往機場辦理退稅。</p>
+        <span class="date-info">4/8 (三)</span>
+        <table class="meal-table">
+            <tr><td>早餐：飯店自助式 或 餐盒</td></tr>
+        </table>
+        <p>今日前往機場辦理退稅，搭機返台。</p>
     </div>
+
     <div id="d12" class="day-box">
         <h1>抵達台北</h1>
-        <p>蜜月圓滿結束！回到溫暖的家。❤️</p>
+        <span class="date-info">4/9 (四)</span>
+        <p>平安抵台，辛苦了！一年的工作辛勞都在這趟蜜月中得到回報。❤️</p>
     </div>
 </div>
 
@@ -213,6 +260,7 @@
         document.querySelectorAll('.day-box').forEach(b => b.classList.remove('active'));
         document.getElementById('d' + n).classList.add('active');
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        // 抓取當前點擊的元素，並給予 active 樣式
         event.currentTarget.classList.add('active');
         window.scrollTo(0,0);
     }
