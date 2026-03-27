@@ -3,86 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>義大利蜜月行前懶人包 & Check-list</title>
+    <title>🇮🇹 義大利蜜月行前懶人包</title>
     <style>
         body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 650px; margin: 20px auto; padding: 15px; background-color: #f0f2f5; }
         .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #008C45; }
-        h1 { color: #CD212A; text-align: center; font-size: 26px; margin-bottom: 5px; }
+        h1 { color: #CD212A; text-align: center; font-size: 26px; margin: 0; }
         .subtitle { text-align: center; color: #666; font-size: 15px; margin-bottom: 25px; }
         h2 { border-left: 6px solid #008C45; padding-left: 12px; font-size: 19px; color: #005a2d; margin-top: 30px; margin-bottom: 15px; }
         
-        /* 表格樣式 */
+        /* 表格與氣溫樣式 */
+        .weather-header { display: flex; justify-content: space-between; align-items: center; }
+        .refresh-btn { font-size: 14px; color: #008C45; cursor: pointer; border: 1px solid #008C45; padding: 2px 8px; border-radius: 4px; }
         table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; background: white; }
         th, td { border: 1px solid #eee; padding: 12px 8px; text-align: center; }
         th { background-color: #f8f9fa; color: #555; }
         
         /* Check-list 樣式 */
         .check-item { display: flex; align-items: center; background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #eee; cursor: pointer; transition: 0.2s; }
-        .check-item:hover { background: #f0f0f0; }
-        input[type="checkbox"] { width: 20px; height: 20px; margin-right: 15px; cursor: pointer; accent-color: #008C45; }
-        .item-text { flex: 1; font-size: 15px; }
+        input[type="checkbox"] { width: 20px; height: 20px; margin-right: 15px; accent-color: #008C45; }
         .tag { font-size: 11px; padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-weight: bold; }
-        .tag-hand { background: #e3f2fd; color: #1976d2; } /* 隨身 */
-        .tag-check { background: #f3e5f5; color: #7b1fa2; } /* 託運 */
-        .tag-warn { background: #fff3e0; color: #e65100; } /* 重要 */
+        .tag-hand { background: #e3f2fd; color: #1976d2; }
+        .tag-check { background: #f3e5f5; color: #7b1fa2; }
+        .tag-warn { background: #fff3e0; color: #e65100; }
 
         .highlight-red { color: #CD212A; font-weight: bold; }
         .footer { text-align: center; font-size: 13px; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+        .notice-box { background: #fff9e6; border: 1px solid #ffeeba; padding: 15px; border-radius: 10px; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h1>🇮🇹 義大利蜜月行前懶人包</h1>
-    <p class="subtitle">出發日期：2026 / 03 / 29 (日)</p>
+    <p class="subtitle">出發日期：2026 / 03 / 29 (日) | 領隊：Paul</p>
 
-    <h2>📅 行程天氣預報</h2>
+    <div class="notice-box">
+        <strong>🚩 機場集合提醒：</strong><br>
+        • 領取物品：導覽耳機、行李束帶、行李牌、歐洲轉接頭、網路卡。<br>
+        • 自帶護照者請務必檢查！並點擊加入 <a href="https://line.me/ti/g/-dC3HR27gg" target="_blank">LINE 行程群組</a>。
+    </div>
+
+    <div class="weather-header">
+        <h2>🌡️ 氣溫預報 (最新查詢: 3/28)</h2>
+        <span class="refresh-btn" onclick="location.reload()">🔄 重新整理氣溫</span>
+    </div>
+    <p style="font-size: 13px; color: #666;">※ 目前義大利受低壓影響，早晚溫差極大，高山上探 <span class="highlight-red">-8°C</span>。</p>
+    
     <table>
         <thead>
             <tr>
-                <th>行程</th>
+                <th>天數</th>
                 <th>日期地點</th>
-                <th>氣溫</th>
-                <th>天氣</th>
+                <th>氣溫 (高/低)</th>
+                <th>天氣狀況</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>D2</td><td>3/30 羅馬/拿波里</td><td>8°/18°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D3</td><td>3/31 蘇蓮多/拿波里</td><td>8°/14°</td><td>☔ <span class="highlight-red">陰偶雨</span></td></tr>
-            <tr><td>D4</td><td>4/01 拿波里/佛羅倫斯</td><td>8°/18°</td><td>🌦️ 轉晴</td></tr>
-            <tr><td>D5</td><td>4/02 威尼斯</td><td>8°/17°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D6</td><td>4/03 加達湖/米蘭</td><td>7°/19°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D7</td><td>4/04 米蘭/比薩</td><td>8°/19°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D8</td><td>4/05 天空之城/羅馬</td><td>6°/19°</td><td>☀️ 晴時多雲</td></tr>
-            <tr><td>D9</td><td>4/06 羅馬</td><td>9°/20°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D2</td><td>3/30 羅馬 / 拿波里</td><td>18° / 8°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D3</td><td>3/31 蘇蓮多 / 拿波里</td><td>14° / 10°</td><td>☔ <span class="highlight-red">晴時多雲偶雨</span></td></tr>
+            <tr><td>D4</td><td>4/01 拿波里 / 佛羅倫斯</td><td>10° / 8°</td><td>☁️ 陰偶雨轉晴</td></tr>
+            <tr><td>D5</td><td>4/02 威尼斯</td><td>17° / 8°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D6</td><td>4/03 加達湖 / 米蘭</td><td>19° / 10°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D7</td><td>4/04 米蘭 / 比薩</td><td>19° / 8°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D8</td><td>4/05 天空之城 / 羅馬</td><td>17° / 6°</td><td>☀️ 晴時多雲</td></tr>
+            <tr><td>D9</td><td>4/06 羅馬</td><td>20° / 9°</td><td>☀️ 晴時多雲</td></tr>
         </tbody>
     </table>
 
-    <h2>🎒 打包 Check-list (左側可勾選)</h2>
+    <h2>🎒 打包 Check-list</h2>
     
     <div class="check-item"><input type="checkbox"><span class="item-text">護照 (若自帶務必確認) <span class="tag tag-warn">必備</span></span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">貼身防扒腰包 (放錢財、證件) <span class="tag tag-warn">重要</span></span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">保暖外套 (因應高山 -8°C 溫差)</span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">洋蔥式穿搭衣物 (方便穿脫)</span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">防滑防潑水休閒鞋 (石板路多)</span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">鋰電池、行動電源 <span class="tag tag-hand">隨身行李</span></span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">每日必用藥品、摺疊傘 <span class="tag tag-hand">隨身行李</span></span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">液體(>100cc)、刀具/指甲剪 <span class="tag tag-check">託運行李</span></span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">保溫瓶 (飯店不一定有熱水壺)</span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">過夜小包 (4/1 佛羅倫斯使用) <span class="tag tag-warn">D4用</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">貼身防扒腰包 (放錢與證件) <span class="tag tag-warn">防扒</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">保暖外套 & 洋蔥式穿搭衣物</span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">舒適防滑防潑水休閒鞋 <span class="tag tag-warn">走路多</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">鋰電池、行動電源 <span class="tag tag-hand">禁託運</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">每日必用藥品、摺疊傘 <span class="tag tag-hand">隨身</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">液體(>100cc)、各式刀具 <span class="tag tag-check">託運</span></span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">保溫瓶 (可向旅館酒吧要熱水)</span></div>
+    <div class="check-item"><input type="checkbox"><span class="item-text">D4 佛羅倫斯過夜包 <span class="tag tag-warn">大行李放車上</span></span></div>
     <div class="check-item"><input type="checkbox"><span class="item-text">紀錄信用卡號與止付電話</span></div>
-    <div class="check-item"><input type="checkbox"><span class="item-text">台幣與歐元現金 (含找零用錢)</span></div>
 
-    <h2>⚠️ 領隊 Paul 的貼心叮嚀</h2>
-    <ul style="padding-left: 20px;">
-        <li><strong>後背包往前背</strong>，側背包往前挪，防範扒手。</li>
-        <li>機場會發網卡、轉接頭、耳機，不用擔心。</li>
-        <li>第四天大行李不進飯店，<span class="highlight-red">過夜包一定要準備好</span>。</li>
-        <li>每天走很多路，老婆記得穿最舒服的那雙鞋！</li>
+    <h2>⚠️ 領隊特別叮嚀</h2>
+    <ul style="padding-left: 20px; font-size: 14px;">
+        <li><strong>治安：</strong> 後背包往前背，歐洲扒手非常厲害。</li>
+        <li><strong>換匯：</strong> 台灣只換紙鈔，到當地消費找開就有硬幣了。</li>
+        <li><strong>上網：</strong> 機場會發網卡，飯店也都有免費 WiFi。</li>
+        <li><strong>行李限制：</strong> 華航託運每人 2 件 (每件 < 23kg)，隨身限 7kg。</li>
     </ul>
 
     <div class="footer">
-        祝我們蜜月之旅圓滿順利 ❤️
+        祝我們蜜月之旅圓滿順利，天天開心！❤️
     </div>
 </div>
 
