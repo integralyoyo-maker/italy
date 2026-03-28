@@ -39,8 +39,24 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .header { background: linear-gradient(135deg, var(--italy-green) 0%, #005a2d 100%); color: white; padding: 25px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 20px; }
+        .header h1 { margin: 0; font-size: 20px; margin-bottom: 8px; }
+        .header p { margin: 4px 0; font-size: 14px; opacity: 0.9; }
         
+        /* 說明會連結按鈕樣式 */
+        .meeting-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
+        }
+        .meeting-link:active { background: rgba(255, 255, 255, 0.4); }
+
         .day-title-box { padding: 20px; background: #fff; border-bottom: 2px solid #f1f1f1; text-align: center; }
         .day-main-title { font-size: 22px; font-weight: bold; color: var(--italy-green); margin-bottom: 5px; display: block; }
         .day-sub-route { font-size: 16px; color: #636e72; font-weight: 500; }
@@ -48,13 +64,11 @@
         .section { padding: 15px 20px; border-bottom: 1px solid #eee; }
         .section-title { font-size: 17px; font-weight: bold; color: var(--italy-green); margin-bottom: 12px; border-left: 4px solid var(--italy-green); padding-left: 10px; }
         
-        /* 時間顯示 */
         .time-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; }
         .time-card { background: #2d3436; color: #fff; padding: 15px; border-radius: 12px; }
         .time-card .label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; display: block; color: #55efc4; }
         .time-card .time { font-family: 'Courier New', monospace; font-size: 26px; font-weight: bold; color: #fab1a0; display: block; }
 
-        /* 用餐資訊樣式 */
         .meal-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #dfe6e9; font-size: 15px; }
         .meal-item:last-child { border-bottom: none; }
         .meal-label { font-weight: bold; color: #2d3436; min-width: 50px; }
@@ -70,7 +84,6 @@
         
         .self-pay { color: white; background: var(--italy-red); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         
-        /* 氣溫與按鈕 */
         .weather-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
         .weather-table td, .weather-table th { border: 1px solid #eee; padding: 8px 4px; text-align: center; }
         .refresh-btn { background: #3498db; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-top: 10px; width: 100%; font-weight: bold; transition: 0.3s; }
@@ -93,7 +106,9 @@
     <div id="d0" class="day-box active">
         <div class="header">
             <h1>🇮🇹 義大利蜜月行前懶人包</h1>
-            <p>2026/03/29 出發 | 領隊：Paul</p>
+            <p>2026/03/29 出發 | 領隊：洪健文(Paul)</p>
+            <p>電話：0917161116</p>
+            <a href="https://www.liontravel.com/html/meet/26/26ei329cid.htm?20260323143945625" target="_blank" class="meeting-link">🔗 查看說明會資料連結</a>
         </div>
         <div class="section">
             <div class="section-title">🕒 即時時差對照</div>
@@ -130,7 +145,7 @@
     <div id="d1" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 1 (3/29 星期日)</span>
-            <span class="day-sub-route">台北 ➡ 羅馬</span>
+            <span class="day-sub-route">桃園國際機場✈️ ➡ 羅馬✈️</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
@@ -152,7 +167,7 @@
     <div id="d2" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 2 (3/30 星期一)</span>
-            <span class="day-sub-route">羅馬 ➡ 龐貝 ➡ 拿波里</span>
+            <span class="day-sub-route">羅馬 ➡️ 龐貝 ➡️ 拿波里</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
@@ -178,7 +193,7 @@
     <div id="d3" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 3 (3/31 星期二)</span>
-            <span class="day-sub-route">卡布里島 ➔ 蘇蓮多 ➔ 拿波里</span>
+            <span class="day-sub-route">卡布里島 ➡️ 蘇蓮多 ➡️ 拿波里</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
@@ -204,7 +219,7 @@
     <div id="d4" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 4 (4/1 星期三)</span>
-            <span class="day-sub-route">拿波里 ➡ 佛羅倫斯</span>
+            <span class="day-sub-route">拿波里 ➡️ 佛羅倫斯</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
@@ -229,14 +244,14 @@
     <div id="d5" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 5 (4/2 星期四)</span>
-            <span class="day-sub-route">佛羅倫斯 ➡ 威尼斯</span>
+            <span class="day-sub-route">佛羅倫斯 ➡️ 威尼斯</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式</span></div>
                 <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">中式料理七菜一湯</span></div>
-                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">墨魚麵佐炸海鮮拼盤</span></div>
+                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">義式墨魚麵佐炸海鮮拼盤+提拉米蘇(含軟飲一杯)</span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
             <div class="spot-list">
@@ -254,14 +269,14 @@
     <div id="d6" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 6 (4/3 星期五)</span>
-            <span class="day-sub-route">威尼斯 ➡ 加達湖 ➡ 米蘭</span>
+            <span class="day-sub-route">威尼斯 ➡️ 加達湖 ➡️ 米蘭</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式</span></div>
                 <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">義式三道式</span></div>
-                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content"><span class="self-pay">方便用車，敬請自理</span></span></div>
+                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content"><span class="self-pay">配合用車時間，敬請自理</span></span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
             <div class="spot-list">
@@ -279,7 +294,7 @@
     <div id="d7" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 7 (4/4 星期六)</span>
-            <span class="day-sub-route">米蘭 ➡ 比薩</span>
+            <span class="day-sub-route">米蘭 ➡️ 比薩</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
@@ -304,13 +319,13 @@
     <div id="d8" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 8 (4/5 星期日)</span>
-            <span class="day-sub-route">比薩 ➡ 天空之城 ➡ 羅馬</span>
+            <span class="day-sub-route">比薩 ➡️ 天空之城 ➡️ 羅馬</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式</span></div>
-                <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">天空之城古城精緻料理</span></div>
+                <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">天空之城古城精緻料理(三道式)</span></div>
                 <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">中式料理七菜一湯</span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
@@ -329,13 +344,13 @@
     <div id="d9" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 9 (4/6 星期一)</span>
-            <span class="day-sub-route">永恆之城 ➡ 羅馬全覽</span>
+            <span class="day-sub-route">永恆之城 ➡️ 羅馬全覽</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式</span></div>
-                <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">義式米其林推薦料理(含酒)</span></div>
+                <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">義式米其林推薦料理(含佐餐酒)</span></div>
                 <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content"><span class="self-pay">方便遊玩，敬請自理</span></span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
@@ -354,14 +369,14 @@
     <div id="d10" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 10 (4/7 星期二)</span>
-            <span class="day-sub-route">梵諦岡 ➡ 羅馬單飛時光</span>
+            <span class="day-sub-route">梵諦岡 ➡️ 羅馬單飛時光</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式</span></div>
                 <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content"><span class="self-pay">方便遊覽，敬請自理</span></span></div>
-                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">羅馬音樂餐廳傳統料理(含酒)</span></div>
+                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">羅馬音樂餐廳享用傳統料理(含佐餐酒)</span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
             <div class="spot-list">
@@ -379,33 +394,29 @@
     <div id="d11" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 11 (4/8 星期三)</span>
-            <span class="day-sub-route">羅馬 ✈ 台北</span>
+            <span class="day-sub-route">羅馬✈️ ✈ 桃園國際機場✈️</span>
         </div>
         <div class="section">
             <div class="section-title">🍴 用餐資訊</div>
             <div class="info-card">
                 <div class="meal-item"><span class="meal-label">早餐</span><span class="meal-content">飯店自助式 或 餐盒</span></div>
-                <div class="meal-item"><span class="meal-label">午餐</span><span class="meal-content">機上套餐</span></div>
-                <div class="meal-item"><span class="meal-label">晚餐</span><span class="meal-content">機上套餐</span></div>
             </div>
             <div class="section-title">📍 當日行程</div>
             <div class="spot-list">
                 <div class="spot-item"><div class="spot-num">1</div>11:00 羅馬起飛返台</div>
             </div>
-            <div class="section-title">🏨 飯店資訊</div>
-            <div class="info-card">機上過夜</div>
         </div>
     </div>
 
     <div id="d12" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 12 (4/9 星期四)</span>
-            <span class="day-sub-route">抵達台北 🏠</span>
+            <span class="day-sub-route">抵達桃園國際機場✈️</span>
         </div>
         <div class="section">
             <div class="section-title">📍 當日行程</div>
             <div class="spot-list">
-                <div class="spot-item"><div class="spot-num">1</div>05:40 抵達桃園機場</div>
+                <div class="spot-item"><div class="spot-num">1</div>05:40 抵達桃園機場✈️</div>
             </div>
         </div>
     </div>
