@@ -716,21 +716,17 @@
     function updateClock() {
         const now = new Date();
         
-        // 臺灣時間格式設定
+        // 設定顯示格式
         const timeOptions = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
-        
-        // 1. 臺灣時間 (CST +8)
-        document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', timeOptions);
+        const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long', timeZone: 'Asia/Taipei' };
+
+        // 1. 臺灣時間 (強制鎖定台北時區 Asia/Taipei)
+        document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', { ...timeOptions, timeZone: 'Asia/Taipei' });
         document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', dateOptions);
 
-        // 2. 義大利時間 (修正為夏令時間 CEST，台灣時差 -6 小時)
-        // 3/29 之後義大利進入夏令時間，時差從 -7 變更為 -6
-        const itOffset = 6 * 60 * 60 * 1000; 
-        const itDate = new Date(now.getTime() - itOffset);
-        
-        document.getElementById('it-time').innerText = itDate.toLocaleTimeString('zh-TW', timeOptions);
-        document.getElementById('it-date').innerText = itDate.toLocaleDateString('zh-TW', dateOptions);
+        // 2. 義大利時間 (強制鎖定羅馬時區 Europe/Rome)
+        document.getElementById('it-time').innerText = now.toLocaleTimeString('zh-TW', { ...timeOptions, timeZone: 'Europe/Rome' });
+        document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', { ...dateOptions, timeZone: 'Europe/Rome' });
     }
 
     function refreshWeather(btn) {
@@ -757,6 +753,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 </script>
+
 
 
 </body>
