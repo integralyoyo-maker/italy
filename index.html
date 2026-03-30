@@ -715,16 +715,22 @@
 <script>
     function updateClock() {
         const now = new Date();
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
         
-        // 臺灣時間
-        document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', options);
+        // 臺灣時間格式設定
+        const timeOptions = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
+        
+        // 1. 臺灣時間 (CST +8)
+        document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', timeOptions);
+        document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', dateOptions);
 
-        // 義大利時間 (CET 台灣-7小時)
-        const itDate = new Date(now.getTime() - (7 * 60 * 60 * 1000));
-        document.getElementById('it-time').innerText = itDate.toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('it-date').innerText = itDate.toLocaleDateString('zh-TW', options);
+        // 2. 義大利時間 (修正為夏令時間 CEST，台灣時差 -6 小時)
+        // 3/29 之後義大利進入夏令時間，時差從 -7 變更為 -6
+        const itOffset = 6 * 60 * 60 * 1000; 
+        const itDate = new Date(now.getTime() - itOffset);
+        
+        document.getElementById('it-time').innerText = itDate.toLocaleTimeString('zh-TW', timeOptions);
+        document.getElementById('it-date').innerText = itDate.toLocaleDateString('zh-TW', dateOptions);
     }
 
     function refreshWeather(btn) {
@@ -740,15 +746,18 @@
         document.querySelectorAll('.day-box').forEach(b => b.classList.remove('active'));
         const target = document.getElementById('d' + n);
         if (target) target.classList.add('active');
+        
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         const navs = document.querySelectorAll('.nav-item');
         if (navs[n]) navs[n].classList.add('active');
         window.scrollTo(0,0);
     }
 
+    // 每秒更新一次
     setInterval(updateClock, 1000);
     updateClock();
 </script>
+
 
 </body>
 </html>
