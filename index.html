@@ -131,13 +131,38 @@
             <div class="section-title">🌡️ 每日氣溫 (03/28 更新)</div>
             <table class="weather-table">
                 <thead><tr><th>日期</th><th>地點</th><th>氣溫</th><th>天氣</th></tr></thead>
-                <tbody>
-    <tr><td>3/31 (今日)</td><td>拿波里 (即時)</td><td id="weather-Naples">讀取中...</td><td id="desc-Naples">--</td></tr>
-    <tr><td>4/01 (D4)</td><td>佛羅倫斯</td><td id="weather-Florence">讀取中...</td><td id="desc-Florence">--</td></tr>
-    <tr><td>4/02 (D5)</td><td>威尼斯</td><td id="weather-Venice">讀取中...</td><td id="desc-Venice">--</td></tr>
-    <tr><td>4/03 (D6)</td><td>米蘭</td><td id="weather-Milan">讀取中...</td><td id="desc-Milan">--</td></tr>
-    <tr><td>4/05 (D8)</td><td>羅馬</td><td id="weather-Rome">讀取中...</td><td id="desc-Rome">--</td></tr>
+<tbody>
+    <tr>
+        <td>3/31 (今日)</td>
+        <td>拿波里 ➡️ 蘇蓮多</td>
+        <td id="weather-Naples">8°-15°</td> <td id="desc-Naples">☀️ 晴多雲</td>
+    </tr>
+    <tr>
+        <td>4/01 (D4)</td>
+        <td>拿波里 ➡️ 佛羅倫斯</td>
+        <td><span id="weather-D4-A">8°-12°</span> / <span id="weather-D4-B">8°-18°</span></td>
+        <td id="desc-D4">☀️ 晴多雲</td>
+    </tr>
+    <tr>
+        <td>4/02 (D5)</td>
+        <td>威尼斯</td>
+        <td id="weather-Venice">8°-17°</td>
+        <td id="desc-Venice">☀️ 晴多雲</td>
+    </tr>
+    <tr>
+        <td>4/03 (D6)</td>
+        <td>加達湖 ➡️ 米蘭</td>
+        <td><span id="weather-D6-A">10°-18°</span> / <span id="weather-D6-B">7°-19°</span></td>
+        <td id="desc-D6">☀️ 晴多雲</td>
+    </tr>
+    <tr>
+        <td>4/05 (D8)</td>
+        <td>天空之城 ➡️ 羅馬</td>
+        <td><span id="weather-D8-A">6°-17°</span> / <span id="weather-D8-B">8°-19°</span></td>
+        <td id="desc-D8">☀️ 晴多雲</td>
+    </tr>
 </tbody>
+
 
             <button class="refresh-btn" onclick="refreshWeather(this)">🔄 重新整理氣溫</button>
         </div>
@@ -724,47 +749,66 @@
         document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', { ...dateOptions, timeZone: 'Europe/Rome' });
     }
 
-    async function refreshWeather(btn) {
-        btn.innerText = "⏳ 正在連線義大利氣象站...";
-        btn.disabled = true;
+async function refreshWeather(btn) {
+    btn.innerText = "⏳ 氣象同步中...";
+    btn.disabled = true;
 
-        // 定義要抓取的城市對應
-        const cities = [
-            { name: 'Naples', id: 'Naples' },
-            { name: 'Florence', id: 'Florence' },
-            { name: 'Venice', id: 'Venice' },
-            { name: 'Milan', id: 'Milan' },
-            { name: 'Rome', id: 'Rome' }
-        ];
-
+    // 取得天氣的工具函數
+    async function getTemp(cityName) {
         try {
-            for (let city of cities) {
-                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city.name},it&units=metric&appid=${apiKey}&lang=zh_tw`);
-                const data = await response.json();
-                
-                if (data.main) {
-                    const temp = Math.round(data.main.temp_min) + "°-" + Math.round(data.main.temp_max) + "°";
-                    const desc = data.weather[0].description;
-                    const icon = data.weather[0].icon;
-                    
-                    document.getElementById(`weather-${city.id}`).innerText = temp;
-                    document.getElementById(`desc-${city.id}`).innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" style="width:20px;vertical-align:middle"> ${desc}`;
-                }
-            }
-
-            btn.innerText = "✨ 氣溫已同步更新";
-            btn.style.background = "#2ecc71";
-        } catch (error) {
-            btn.innerText = "❌ 同步失敗，請稍後再試";
-            console.error(error);
-        }
-
-        setTimeout(() => {
-            btn.innerText = "🔄 重新整理氣溫";
-            btn.style.background = "#3498db";
-            btn.disabled = false;
-        }, 2000);
+            const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName},it&units=metric&appid=${apiKey}&lang=zh_tw`);
+            const data = await res.json();
+            return {
+                temp: Math.round(data.main.temp_min) + "°-" + Math.round(data.main.temp_max) + "°",
+                desc: data.weather[0].description,
+                icon: data.weather[0].icon
+            };
+        } catch (e) { return null; }
     }
+
+    // 更新單一城市
+    const d3 = await getTemp('Naples');
+    if(d3) {
+        document.getElementById('weather-Naples').innerText = d3.temp;
+        document.getElementById('desc-Naples').innerHTML = `<img src="https://openweathermap.org/img/wn/${d3.icon}.png" style="width:18px"> ${d3.desc}`;
+    }
+
+    // 更新移動日 (A地/B地)
+    // D4: 拿波里 -> 佛羅倫斯
+    const d4a = await getTemp('Naples');
+    const d4b = await getTemp('Florence');
+    if(d4a) document.getElementById('weather-D4-A').innerText = d4a.temp;
+    if(d4b) document.getElementById('weather-D4-B').innerText = d4b.temp;
+    if(d4b) document.getElementById('desc-D4').innerHTML = `<img src="https://openweathermap.org/img/wn/${d4b.icon}.png" style="width:18px"> ${d4b.desc}`;
+
+    // D5: 威尼斯
+    const d5 = await getTemp('Venice');
+    if(d5) {
+        document.getElementById('weather-Venice').innerText = d5.temp;
+        document.getElementById('desc-Venice').innerHTML = `<img src="https://openweathermap.org/img/wn/${d5.icon}.png" style="width:18px"> ${d5.desc}`;
+    }
+
+    // D6: 這裡用維羅納(Verona)代表加達湖 -> 米蘭
+    const d6a = await getTemp('Verona');
+    const d6b = await getTemp('Milan');
+    if(d6a) document.getElementById('weather-D6-A').innerText = d6a.temp;
+    if(d6b) document.getElementById('weather-D6-B').innerText = d6b.temp;
+
+    // D8: 這裡用維泰博(Viterbo)代表天空之城 -> 羅馬
+    const d8a = await getTemp('Viterbo');
+    const d8b = await getTemp('Rome');
+    if(d8a) document.getElementById('weather-D8-A').innerText = d8a.temp;
+    if(d8b) document.getElementById('weather-D8-B').innerText = d8b.temp;
+
+    btn.innerText = "✨ 已更新 (義大利時間 " + new Date().toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit', timeZone:'Europe/Rome'}) + ")";
+    btn.style.background = "#2ecc71";
+    setTimeout(() => {
+        btn.innerText = "🔄 重新整理氣溫";
+        btn.style.background = "#3498db";
+        btn.disabled = false;
+    }, 2000);
+}
+
 
     function go(n) {
         document.querySelectorAll('.day-box').forEach(b => b.classList.remove('active'));
