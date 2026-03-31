@@ -59,21 +59,22 @@
                 <span id="tw-time" class="time">--:--:--</span>
             </div>
         </div>
-        <div class="section">
-            <div class="section-title">🌡️ 氣溫預報 (最後同步：<span id="update-ts">--:--</span>)</div>
+                <div class="section">
+            <div class="section-title">🌡️ 每日氣溫 (最後同步：<span id="update-ts">讀取中</span>)</div>
             <table class="weather-table">
                 <thead><tr><th>日期</th><th>地點</th><th>氣溫</th><th>天氣</th></tr></thead>
-                <tbody id="weather-body">
-                    <tr><td>3/31(今日)</td><td>拿波里</td><td id="weather-Naples">--</td><td id="desc-Naples">--</td></tr>
-                    <tr><td>4/01(D4)</td><td>佛羅倫斯</td><td id="weather-Florence">--</td><td id="desc-Florence">--</td></tr>
-                    <tr><td>4/02(D5)</td><td>威尼斯</td><td id="weather-Venice">--</td><td id="desc-Venice">--</td></tr>
-                    <tr><td>4/03(D6)</td><td>米蘭</td><td id="weather-Milan">--</td><td id="desc-Milan">--</td></tr>
-                    <tr><td>4/04(D7)</td><td>比薩</td><td id="weather-Pisa">--</td><td id="desc-Pisa">--</td></tr>
-                    <tr><td>4/05(D8)</td><td>羅馬</td><td id="weather-Rome">--</td><td id="desc-Rome">--</td></tr>
+                <tbody>
+                    <tr><td>3/31 (今日)</td><td>拿波里 ➡️ 蘇蓮多</td><td id="weather-Naples">8°-15°</td><td id="desc-Naples">☀️ 晴多雲</td></tr>
+                    <tr><td>4/01 (D4)</td><td>拿波里 ➡️ 佛羅倫斯</td><td><span id="weather-D4-A">8°-12°</span> / <span id="weather-D4-B">8°-18°</span></td><td id="desc-D4">☀️ 晴多雲</td></tr>
+                    <tr><td>4/02 (D5)</td><td>威尼斯</td><td id="weather-Venice">8°-17°</td><td id="desc-Venice">☀️ 晴多雲</td></tr>
+                    <tr><td>4/03 (D6)</td><td>加達湖 ➡️ 米蘭</td><td><span id="weather-D6-A">10°-18°</span> / <span id="weather-D6-B">7°-19°</span></td><td id="desc-D6">☀️ 晴多雲</td></tr>
+                    <tr><td>4/05 (D8)</td><td>天空之城 ➡️ 羅馬</td><td><span id="weather-D8-A">6°-17°</span> / <span id="weather-D8-B">8°-19°</span></td><td id="desc-D8">☀️ 晴多雲</td></tr>
                 </tbody>
             </table>
+            <button class="refresh-btn" onclick="refreshWeather(this)">🔄 重新整理氣溫</button>
         </div>
     </div>
+
     <div id="d1" class="day-box">
         <div class="day-title-box">
             <span class="day-main-title">Day 1 (3/29 星期日)</span>
