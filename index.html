@@ -136,6 +136,42 @@
 
 </div>
 
+// --- 左右滑動切換頁面功能 ---
+let touchstartX = 0;
+let touchendX = 0;
+
+// 定義頁面順序清單，必須與你的 id 一致
+const pageOrder = ['home', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12'];
+
+function handleGesture() {
+    let currentIndex = pageOrder.indexOf(document.querySelector('.page.active').id);
+    
+    // 向左滑 (下一頁)
+    if (touchendX < touchstartX - 100) { 
+        if (currentIndex < pageOrder.length - 1) {
+            showPage(pageOrder[currentIndex + 1]);
+        }
+    }
+    
+    // 向右滑 (前一頁)
+    if (touchendX > touchstartX + 100) {
+        if (currentIndex > 0) {
+            showPage(pageOrder[currentIndex - 1]);
+        }
+    }
+}
+
+// 監聽觸控事件
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    handleGesture();
+});
+
+
 <script>
     function updateClock() {
     const now = new Date();
