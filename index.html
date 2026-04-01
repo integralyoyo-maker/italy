@@ -136,6 +136,38 @@
 
 </div>
 
+<script>
+    function updateClock() {
+    const now = new Date();
+    
+    // --- 義大利時間處理 ---
+    const itOptions = { timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
+    const itTimeOptions = { timeZone: 'Europe/Rome', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    
+    document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', itOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
+    document.getElementById('it-time').innerText = now.toLocaleTimeString('zh-TW', itTimeOptions);
+
+    // --- 臺灣時間處理 ---
+    const twOptions = { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
+    const twTimeOptions = { timeZone: 'Asia/Taipei', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    
+    document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', twOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
+    document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', twTimeOptions);
+}
+
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('onclick').includes(pageId));
+        });
+        window.scrollTo(0,0);
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
 // --- 左右滑動切換頁面功能 ---
 let touchstartX = 0;
 let touchendX = 0;
@@ -171,38 +203,6 @@ document.addEventListener('touchend', e => {
     handleGesture();
 });
 
-
-<script>
-    function updateClock() {
-    const now = new Date();
-    
-    // --- 義大利時間處理 ---
-    const itOptions = { timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
-    const itTimeOptions = { timeZone: 'Europe/Rome', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    
-    document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', itOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
-    document.getElementById('it-time').innerText = now.toLocaleTimeString('zh-TW', itTimeOptions);
-
-    // --- 臺灣時間處理 ---
-    const twOptions = { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
-    const twTimeOptions = { timeZone: 'Asia/Taipei', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    
-    document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', twOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
-    document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', twTimeOptions);
-}
-
-
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        document.querySelectorAll('.nav-item').forEach(btn => {
-            btn.classList.toggle('active', btn.getAttribute('onclick').includes(pageId));
-        });
-        window.scrollTo(0,0);
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
 </script>
 </body>
 </html>
