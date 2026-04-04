@@ -145,14 +145,14 @@
     const itOptions = { timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
     const itTimeOptions = { timeZone: 'Europe/Rome', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
     
-    document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', itOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
+    document.getElementById('it-date').innerText = now.toLocaleDateString('zh-TW', itOptions).replace(/\//g, '年').replace(/月/, '月');
     document.getElementById('it-time').innerText = now.toLocaleTimeString('zh-TW', itTimeOptions);
 
     // --- 臺灣時間處理 ---
     const twOptions = { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
     const twTimeOptions = { timeZone: 'Asia/Taipei', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
     
-    document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', twOptions).replace(/\//g, '年').replace(/月/, '月') + '日';
+    document.getElementById('tw-date').innerText = now.toLocaleDateString('zh-TW', twOptions).replace(/\//g, '年').replace(/月/, '月');
     document.getElementById('tw-time').innerText = now.toLocaleTimeString('zh-TW', twTimeOptions);
 }
 
